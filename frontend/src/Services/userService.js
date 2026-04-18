@@ -16,6 +16,11 @@ export default {
         return request(API_URL)
     },
 
+    async getUserById(id) {
+        const response = await fetch(`${API_URL}/${id}`)
+        return handleResponse(response)
+    },
+
     createUser(user) {
         return request(API_URL, {
             method: 'POST',
