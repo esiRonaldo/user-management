@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import userService from '../../services/userService'
+import userService from '../../Services/userService'
 
 export default {
   name: 'UserForm',

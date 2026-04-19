@@ -16,9 +16,8 @@ export default {
         return request(API_URL)
     },
 
-    async getUserById(id) {
-        const response = await fetch(`${API_URL}/${id}`)
-        return handleResponse(response)
+     getUserById(id) {
+        return response = request(`${API_URL}/${id}`)
     },
 
     createUser(user) {
