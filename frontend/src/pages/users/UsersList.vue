@@ -2,6 +2,10 @@
   <div class="container">
     <h2>Users</h2>
 
+    <div class="search">
+      <input type="text" placeholder="Search users..." @input="onSearchInput" />
+    </div>
+    
     <div class="actions">
       <button @click="goToCreate">+ New User</button>
     </div>
@@ -57,6 +61,19 @@ export default {
   },
 
   methods: {
+    onSearchInput(event) {
+      const query = event.target.value.toLowerCase()
+      if(!query) {
+        this.loadUsers()
+        return
+      }
+      this.users = this.users.filter(user =>
+        user.first_name.toLowerCase().includes(query) ||
+        user.last_name.toLowerCase().includes(query) ||
+        user.username.toLowerCase().includes(query)
+        )
+      },
+
     async loadUsers() {
       this.isLoading = true
       this.errorMessage = ''
