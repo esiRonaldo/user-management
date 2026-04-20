@@ -17,7 +17,7 @@ export default {
     },
 
      getUserById(id) {
-        return response = request(`${API_URL}/${id}`)
+        return request(`${API_URL}/${id}`)
     },
 
     createUser(user) {

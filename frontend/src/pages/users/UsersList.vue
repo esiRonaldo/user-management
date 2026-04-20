@@ -2,18 +2,28 @@
   <div class="container">
     <h2>Users</h2>
 
-    <div class="search">
-      <input type="text" placeholder="Search users..." @input="onSearchInput" />
-    </div>
-    
-    <div class="actions">
+    <div class="toolbar">
       <button @click="goToCreate">+ New User</button>
+
+      <label for="sort-by" class="sort-label">Sort by</label>
+
+      <select id="sort-by" v-model="sortBy" class="sort-select">
+        <option value="first_name">First Name</option>
+        <option value="last_name">Last Name</option>
+      </select>
+
+      <input
+        v-model.trim="searchQuery"
+        type="text"
+        placeholder="Search users..."
+        class="search-input"
+      />
     </div>
 
     <p v-if="isLoading">Loading...</p>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <table v-if="!isLoading && users.length" class="table">
+    <table v-if="!isLoading && displayedUsers.length" class="table">
       <thead>
         <tr>
           <th>First Name</th>
@@ -26,7 +36,7 @@
       </thead>
 
       <tbody>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in displayedUsers" :key="user.id">
           <td>{{ user.first_name }}</td>
           <td>{{ user.last_name }}</td>
           <td>{{ user.address }}</td>
@@ -42,7 +52,7 @@
       </tbody>
     </table>
 
-    <p v-if="!isLoading && !users.length">No users found.</p>
+    <p v-if="!isLoading && !displayedUsers.length">No users found.</p>
   </div>
 </template>
 
@@ -55,25 +65,37 @@ export default {
   data() {
     return {
       users: [],
+      searchQuery: '',
+      sortBy: 'last_name',
       isLoading: false,
       errorMessage: '',
     }
   },
 
-  methods: {
-    onSearchInput(event) {
-      const query = event.target.value.toLowerCase()
-      if(!query) {
-        this.loadUsers()
-        return
-      }
-      this.users = this.users.filter(user =>
-        user.first_name.toLowerCase().includes(query) ||
-        user.last_name.toLowerCase().includes(query) ||
-        user.username.toLowerCase().includes(query)
-        )
-      },
+  computed: {
+    displayedUsers() {
+      const query = this.searchQuery.toLowerCase()
+      let filteredUsers = this.users
 
+      if (query) {
+        filteredUsers = this.users.filter((user) =>
+          user.first_name.toLowerCase().includes(query) ||
+          user.last_name.toLowerCase().includes(query) ||
+          user.username.toLowerCase().includes(query)
+        )
+      }
+
+      if (!this.sortBy) {
+        return filteredUsers
+      }
+
+      return [...filteredUsers].sort((a, b) =>
+        a[this.sortBy].localeCompare(b[this.sortBy])
+      )
+    },
+  },
+
+  methods: {
     async loadUsers() {
       this.isLoading = true
       this.errorMessage = ''
@@ -119,8 +141,28 @@ export default {
   margin: 2rem auto;
 }
 
-.actions {
+.toolbar {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-input,
+.sort-select {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.sort-label {
+  font-weight: 600;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 220px;
 }
 
 button {
