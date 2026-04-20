@@ -3,7 +3,7 @@
     <h2>Users</h2>
 
     <div class="toolbar">
-      <button @click="goToCreate">+ New User</button>
+      <BaseButton @click="goToCreate">+ New User</BaseButton>
 
       <label for="sort-by" class="sort-label">Sort by</label>
 
@@ -43,10 +43,10 @@
           <td>{{ user.phone_number }}</td>
           <td>{{ user.username }}</td>
           <td>
-            <button @click="editUser(user.id)">Edit</button>
-            <button class="danger" @click="deleteUser(user.id)">
+            <BaseButton @click="editUser(user.id)">Edit</BaseButton>
+            <BaseButton variant="danger" @click="deleteUser(user.id)">
               Delete
-            </button>
+            </BaseButton>
           </td>
         </tr>
       </tbody>
@@ -57,10 +57,15 @@
 </template>
 
 <script>
+import BaseButton from '../../components/BaseButton.vue'
 import userService from '../../Services/userService'
 
 export default {
   name: 'UsersList',
+
+  components: {
+    BaseButton,
+  },
 
   data() {
     return {
@@ -163,20 +168,6 @@ export default {
 .search-input {
   flex: 1;
   min-width: 220px;
-}
-
-button {
-  padding: 0.5rem 0.8rem;
-  margin-right: 0.4rem;
-  border: none;
-  background-color: #42b983;
-  color: white;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-button.danger {
-  background-color: #d9534f;
 }
 
 .table {

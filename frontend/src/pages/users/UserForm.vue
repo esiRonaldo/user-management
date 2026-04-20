@@ -31,20 +31,25 @@
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
       <div class="actions">
-        <button type="submit">
+        <BaseButton type="submit">
           {{ isEditMode ? 'Update' : 'Create' }}
-        </button>
-        <button type="button" @click="goBack">Cancel</button>
+        </BaseButton>
+        <BaseButton variant="secondary" @click="goBack">Cancel</BaseButton>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import BaseButton from '../../components/BaseButton.vue'
 import userService from '../../Services/userService'
 
 export default {
   name: 'UserForm',
+
+  components: {
+    BaseButton,
+  },
 
   props: ['id'],
 
@@ -146,19 +151,6 @@ input {
 
 .actions {
   margin-top: 1rem;
-}
-
-button {
-  margin-right: 0.5rem;
-  padding: 0.5rem 0.8rem;
-  border: none;
-  background-color: #42b983;
-  color: white;
-  cursor: pointer;
-}
-
-button[type='button'] {
-  background-color: gray;
 }
 
 .error {
