@@ -15,17 +15,27 @@
 
       <div class="form-control">
         <label>Address</label>
-        <input v-model.trim="form.address" />
+        <input
+          v-model.trim="form.address"
+          placeholder="e.g. 12 Main Street, Berlin"
+        />
       </div>
 
       <div class="form-control">
         <label>Phone Number</label>
-        <input v-model.trim="form.phone_number" />
+        <input
+          v-model.trim="form.phone_number"
+          placeholder="e.g. +49 151 23456789"
+        />
       </div>
 
       <div class="form-control">
         <label>Username</label>
-        <input v-model.trim="form.username" @input="manualEdit = true" />
+        <input
+          v-model.trim="form.username"
+          placeholder="e.g. maria.smith"
+          @input="manualEdit = true"
+        />
       </div>
 
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
