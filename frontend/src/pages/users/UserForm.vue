@@ -51,15 +51,10 @@
 </template>
 
 <script>
-import BaseButton from '../../components/BaseButton.vue'
 import userService from '../../Services/userService'
 
 export default {
   name: 'UserForm',
-
-  components: {
-    BaseButton,
-  },
 
   props: ['id'],
 
@@ -90,7 +85,10 @@ export default {
       )
     },
   },
-
+//TODO: remove all unncessary css, unsude imports, and comments, make pop up page for deleteuser, and add confirmation dialog for delete user
+//Todo: add error handling for all api calls, and show error messages to user in a user friendly way, and add loading state for all api calls, and show loading spinner to user while api call is in progress
+//TOOD: clean up code, and remove all console logs, and add comments to explain code, and add unit tests for all components, and add integration tests for all components, and add end-to-end tests for all components
+//TODO: cleanup unnessary code in backend, and remove all console logs, and add comments to explain code, and add unit tests for all functions, and add integration tests for all functions, and add end-to-end tests for all functions
   methods: {
     async loadUser() {
       if (!this.id) return

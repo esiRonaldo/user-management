@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+    <BaseDialog :show="showDeleteDialog" title="Delete User" @close="closeDialog">
+      <p>Are you sure you want to delete this user?</p>
+
+      <template #actions>
+        <BaseButton variant="secondary" @click="closeDialog">Close</BaseButton>
+        <BaseButton variant="danger" @click="deleteUser">Confirm</BaseButton>
+      </template>
+    </BaseDialog>
+
     <h2>Users</h2>
 
     <div class="toolbar">
@@ -45,7 +54,7 @@
             <td>{{ user.username }}</td>
             <td class="actions-cell">
               <BaseButton @click="editUser(user.id)">Edit</BaseButton>
-              <BaseButton variant="danger" @click="deleteUser(user.id)">
+              <BaseButton variant="danger" @click="openDialog(user.id)">
                 Delete
               </BaseButton>
             </td>
@@ -59,15 +68,10 @@
 </template>
 
 <script>
-import BaseButton from '../../components/BaseButton.vue'
 import userService from '../../Services/userService'
 
 export default {
   name: 'UsersList',
-
-  components: {
-    BaseButton,
-  },
 
   data() {
     return {
@@ -76,6 +80,8 @@ export default {
       sortBy: 'last_name',
       isLoading: false,
       errorMessage: '',
+      showDeleteDialog: false,
+      userId: null,
     }
   },
 
@@ -124,15 +130,26 @@ export default {
       this.$router.push(`/users/${id}/edit`)
     },
 
-    async deleteUser(id) {
-      if (!confirm('Are you sure?')) return
+    async deleteUser() {
+      if (!this.userId) return
 
       try {
-        await userService.deleteUser(id)
-        this.loadUsers()
+        await userService.deleteUser(this.userId)
+        this.closeDialog()
+        await this.loadUsers()
       } catch (err) {
         this.errorMessage = err.message
       }
+    },
+
+    openDialog(id) {
+      this.showDeleteDialog = true
+      this.userId = id
+    },
+
+    closeDialog() {
+      this.userId = null
+      this.showDeleteDialog = false
     },
   },
 
