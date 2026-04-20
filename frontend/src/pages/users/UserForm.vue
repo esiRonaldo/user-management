@@ -31,7 +31,7 @@
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
       <div class="actions">
-        <BaseButton type="submit">
+        <BaseButton type="submit" :disabled="!isFormComplete">
           {{ isEditMode ? 'Update' : 'Create' }}
         </BaseButton>
         <BaseButton variant="secondary" @click="goBack">Cancel</BaseButton>
@@ -70,6 +70,14 @@ export default {
   computed: {
     isEditMode() {
       return !!this.id
+    },
+
+    isFormComplete() {
+      const { first_name, last_name, address, phone_number, username } = this.form
+
+      return [first_name, last_name, address, phone_number, username].every(
+        (value) => value && value.trim()
+      )
     },
   },
 
