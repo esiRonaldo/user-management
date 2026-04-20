@@ -23,34 +23,36 @@
     <p v-if="isLoading">Loading...</p>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <table v-if="!isLoading && displayedUsers.length" class="table">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Address</th>
-          <th>Phone</th>
-          <th>Username</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <div v-if="!isLoading && displayedUsers.length" class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Username</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr v-for="user in displayedUsers" :key="user.id">
-          <td>{{ user.first_name }}</td>
-          <td>{{ user.last_name }}</td>
-          <td>{{ user.address }}</td>
-          <td>{{ user.phone_number }}</td>
-          <td>{{ user.username }}</td>
-          <td>
-            <BaseButton @click="editUser(user.id)">Edit</BaseButton>
-            <BaseButton variant="danger" @click="deleteUser(user.id)">
-              Delete
-            </BaseButton>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr v-for="user in displayedUsers" :key="user.id">
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.username }}</td>
+            <td class="actions-cell">
+              <BaseButton @click="editUser(user.id)">Edit</BaseButton>
+              <BaseButton variant="danger" @click="deleteUser(user.id)">
+                Delete
+              </BaseButton>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <p v-if="!isLoading && !displayedUsers.length">No users found.</p>
   </div>
@@ -144,6 +146,7 @@ export default {
 .container {
   max-width: 900px;
   margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .toolbar {
@@ -168,6 +171,12 @@ export default {
 .search-input {
   flex: 1;
   min-width: 220px;
+
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .table {
@@ -188,5 +197,9 @@ export default {
 
 .error {
   color: red;
+}
+
+.actions-cell {
+  white-space: nowrap;
 }
 </style>Ì

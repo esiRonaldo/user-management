@@ -156,6 +156,7 @@ export default {
 .container {
   max-width: 600px;
   margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .form-control {
@@ -169,6 +170,7 @@ input {
 
 .actions {
   margin-top: 1rem;
+  gap: 0.75rem;
 }
 
 .error {
