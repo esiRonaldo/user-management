@@ -183,7 +183,6 @@ export default {
 .search-input {
   flex: 1;
   min-width: 220px;
-
 }
 
 .table-wrapper {

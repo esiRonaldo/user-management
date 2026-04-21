@@ -30,7 +30,7 @@
 
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-      <div class="actions">
+      <div>
         <BaseButton type="submit" :disabled="!isFormComplete">
           {{ isEditMode ? 'Update' : 'Create' }}
         </BaseButton>
@@ -75,10 +75,7 @@ export default {
       )
     },
   },
-  //TODO: remove all unncessary css, unsude imports, and comments, make pop up page for deleteuser, and add confirmation dialog for delete user
-  //Todo: add error handling for all api calls, and show error messages to user in a user friendly way, and add loading state for all api calls, and show loading spinner to user while api call is in progress
-  //TOOD: clean up code, and remove all console logs, and add comments to explain code, and add unit tests for all components, and add integration tests for all components, and add end-to-end tests for all components
-  //TODO: cleanup unnessary code in backend, and remove all console logs, and add comments to explain code, and add unit tests for all functions, and add integration tests for all functions, and add end-to-end tests for all functions
+  //Todo: add error handling for all api calls, and show error messages to user in a user friendly way, and add loading state for all api calls, and show loading spinner to user while api call is in progre
   methods: {
     async loadUser() {
       if (!this.id) return
@@ -154,11 +151,6 @@ export default {
 input {
   width: 100%;
   padding: 0.5rem;
-}
-
-.actions {
-  margin-top: 1rem;
-  gap: 0.75rem;
 }
 
 .error {

@@ -1,7 +1,13 @@
 const API_URL = 'http://127.0.0.1:8000/users'
 
 async function request(url, options = {}) {
-    const res = await fetch(url, options)
+    let res
+
+    try {
+        res = await fetch(url, options)
+    } catch (error) {
+        throw new Error('Unable to reach the server. Please try again.')
+    }
 
     if (!res.ok) {
         const data = await res.json().catch(() => ({}))
