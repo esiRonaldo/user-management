@@ -16,7 +16,7 @@ export default {
         return request(API_URL)
     },
 
-     getUserById(id) {
+    getUserById(id) {
         return request(`${API_URL}/${id}`)
     },
 

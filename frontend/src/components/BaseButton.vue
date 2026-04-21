@@ -1,11 +1,5 @@
 <template>
-  <button
-    class="base-button"
-    :class="variant"
-    :type="type"
-    :disabled="disabled"
-    @click="$emit('click', $event)"
-  >
+  <button class="base-button" :class="variant" :type="type" :disabled="disabled" @click="$emit('click', $event)">
     <slot />
   </button>
 </template>

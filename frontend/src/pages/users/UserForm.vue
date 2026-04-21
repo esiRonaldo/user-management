@@ -15,27 +15,17 @@
 
       <div class="form-control">
         <label>Address</label>
-        <input
-          v-model.trim="form.address"
-          placeholder="e.g. 12 Main Street, Berlin"
-        />
+        <input v-model.trim="form.address" placeholder="e.g. 12 Main Street, Berlin" />
       </div>
 
       <div class="form-control">
         <label>Phone Number</label>
-        <input
-          v-model.trim="form.phone_number"
-          placeholder="e.g. +49 151 23456789"
-        />
+        <input v-model.trim="form.phone_number" placeholder="e.g. +49 151 23456789" />
       </div>
 
       <div class="form-control">
         <label>Username</label>
-        <input
-          v-model.trim="form.username"
-          placeholder="e.g. maria.smith"
-          @input="manualEdit = true"
-        />
+        <input v-model.trim="form.username" placeholder="e.g. maria.smith" @input="manualEdit = true" />
       </div>
 
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
@@ -85,10 +75,10 @@ export default {
       )
     },
   },
-//TODO: remove all unncessary css, unsude imports, and comments, make pop up page for deleteuser, and add confirmation dialog for delete user
-//Todo: add error handling for all api calls, and show error messages to user in a user friendly way, and add loading state for all api calls, and show loading spinner to user while api call is in progress
-//TOOD: clean up code, and remove all console logs, and add comments to explain code, and add unit tests for all components, and add integration tests for all components, and add end-to-end tests for all components
-//TODO: cleanup unnessary code in backend, and remove all console logs, and add comments to explain code, and add unit tests for all functions, and add integration tests for all functions, and add end-to-end tests for all functions
+  //TODO: remove all unncessary css, unsude imports, and comments, make pop up page for deleteuser, and add confirmation dialog for delete user
+  //Todo: add error handling for all api calls, and show error messages to user in a user friendly way, and add loading state for all api calls, and show loading spinner to user while api call is in progress
+  //TOOD: clean up code, and remove all console logs, and add comments to explain code, and add unit tests for all components, and add integration tests for all components, and add end-to-end tests for all components
+  //TODO: cleanup unnessary code in backend, and remove all console logs, and add comments to explain code, and add unit tests for all functions, and add integration tests for all functions, and add end-to-end tests for all functions
   methods: {
     async loadUser() {
       if (!this.id) return

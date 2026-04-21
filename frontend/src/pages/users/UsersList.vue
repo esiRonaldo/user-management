@@ -21,12 +21,7 @@
         <option value="last_name">Last Name</option>
       </select>
 
-      <input
-        v-model.trim="searchQuery"
-        type="text"
-        placeholder="Search users..."
-        class="search-input"
-      />
+      <input v-model.trim="searchQuery" type="text" placeholder="Search users..." class="search-input" />
     </div>
 
     <p v-if="isLoading">Loading...</p>

@@ -12,8 +12,9 @@
           <slot></slot>
         </section>
         <menu v-if="!fixed">
-          <slot name="actions">        <BaseButton variant="danger" @click="deleteUser">Confirm</BaseButton>
-</slot>
+          <slot name="actions">
+            <BaseButton variant="danger" @click="deleteUser">Confirm</BaseButton>
+          </slot>
         </menu>
       </dialog>
     </transition>
